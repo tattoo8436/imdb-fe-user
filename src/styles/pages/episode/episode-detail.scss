@@ -1,0 +1,269 @@
+.episode-detail {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+
+        &__left {
+            &__name {
+                font-size: 2rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        &__right {
+            display: flex;
+
+            .rating-imdb {
+                margin-right: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &__label {
+                    margin-bottom: 0.5rem;
+                }
+
+                &__value {
+                    display: flex;
+                    align-items: center;
+
+                    &__icon {
+                        color: $yellow;
+                        font-size: 1.5rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+
+            .rating-user {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &__label {
+                    margin-bottom: 0.5rem;
+                }
+
+                &__input {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+
+                    &__icon {
+                        fill: $primary;
+                        font-size: 1.5rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                &__value {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+
+                    &__icon {
+                        color: $secondary;
+                        font-size: 1.5rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    &__content {
+        margin-bottom: 1rem;
+        display: flex;
+
+        &__asset {
+            flex-shrink: 0;
+
+            &__image {
+                height: 300px;
+            }
+        }
+
+        &__description {
+            margin-left: 2rem;
+        }
+
+        &__director {
+            display: flex;
+            margin-bottom: 1rem;
+
+            &__label {
+                margin-right: 0.5rem;
+            }
+
+            &__value {
+                display: flex;
+
+                &__item::after {
+                    content: ',';
+                }
+
+                &__item {
+                    margin-right: 0.5rem;
+                    font-weight: 600;
+                }
+
+                &__item:last-child::after {
+                    content: '';
+                }
+            }
+        }
+
+        &__actor {
+            margin: 1rem 0;
+        }
+    }
+
+    &__episode {
+        margin-bottom: 1rem;
+
+        .anticon,
+        .ant-collapse-header-text {
+            font-weight: 600;
+        }
+
+        .episode-item {
+            display: flex;
+            cursor: pointer;
+            border: 1px solid $divider;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+
+            &__image {
+                width: 80px;
+                height: 120px;
+                margin-right: 1rem;
+            }
+
+            &__detail {
+                &__name {
+                    color: $primary;
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                }
+
+                &__score {
+                    margin-bottom: 0.5rem;
+
+                    .anticon {
+                        color: $yellow;
+                        font-size: 20px;
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                &__description {
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        margin-bottom: 1rem;
+
+        &__actor {
+            &__title {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+
+                &__icon {
+                    height: 1.5rem;
+                    width: 4px;
+                    background-color: $primary;
+                    margin-right: 0.5rem;
+                }
+
+                &__text {
+
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                }
+            }
+
+            &__content {
+                .item-actor {
+                    display: flex;
+                    align-items: center;
+
+                    &__image {
+                        width: 80px;
+                        height: 80px;
+                        margin-right: 1rem;
+                    }
+
+                    &__text {
+                        &__name {
+                            font-weight: 600;
+                        }
+
+                        &__name-in-movie {
+                            margin-top: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__comment {
+            border: 1px solid $divider;
+            border-radius: 8px;
+            padding: 1rem;
+
+
+            &__title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+            &__input {
+                margin-bottom: 1rem;
+
+                &__btn {
+                    margin-left: 0.5rem;
+                }
+
+                .form {
+                    display: flex;
+
+                    &__input {
+                        flex: 1;
+                    }
+                }
+            }
+
+            &__content {
+                max-height: 400px;
+                overflow-y: auto;
+
+                .item-comment {
+                    border-bottom: 1px solid $divider;
+                    margin-bottom: 1rem;
+
+                    &__header {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+
+                        &__name {
+                            font-weight: 600;
+                        }
+                    }
+
+                    &__content {
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}

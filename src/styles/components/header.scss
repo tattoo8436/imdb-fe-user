@@ -1,0 +1,55 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary;
+    color: #fff;
+    font-weight: 600;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 2;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+        cursor: pointer;
+
+        .logo {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+
+        &__search {
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .divider {
+            width: 1px;
+            height: 1rem;
+            background-color: #fff;
+        }
+
+        &__btn {
+            padding: 1rem;
+            cursor: pointer;
+
+            &>* {
+                padding: 2px;
+            }
+
+            &__icon {
+                font-size: .8rem;
+            }
+        }
+    }
+}

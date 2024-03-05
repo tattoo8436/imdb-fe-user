@@ -1,0 +1,96 @@
+$primary: #032541;
+$light-primary: #91a2b1;
+$secondary: #b443d6;
+$yellow: #e8cf31;
+
+$divider: #ddd;
+
+* {
+    //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Ysabeau Infant', sans-serif;
+}
+
+.card {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.card-hover {
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 1rem;
+    transition: .3s;
+    border: 1px solid $divider;
+
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.form {
+    &__item {
+        height: 100px;
+        position: relative;
+
+        .error-msg {
+            color: red;
+            margin: 4px 0;
+            font-size: .8rem;
+        }
+
+        &__label {
+            margin-bottom: 10px;
+        }
+
+        &__input {
+            width: 100%;
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.divider {
+    height: 0.8px;
+    background-color: $divider;
+}
+
+.ant-modal-content {
+    padding: 0 !important;
+    background-color: #f8f8f8;
+}
+
+.ant-modal-footer {
+    padding: 1rem;
+    padding-top: 0;
+}
+
+.modal {
+    &__header {
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-align: center;
+        padding: .5rem;
+        background: #FFF;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 8px 8px 0 0;
+    }
+
+    &__content {
+        padding: 2rem;
+    }
+}
+
+.error-msg {
+    color: red;
+    margin: 0;
+    font-size: .8rem !important;
+}

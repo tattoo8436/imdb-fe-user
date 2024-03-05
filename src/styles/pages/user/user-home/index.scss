@@ -1,0 +1,11 @@
+.user-home {
+    position: relative;
+
+    &__content {
+        height: 120vh;
+        background-color: #ccc;
+        padding: 0 2rem;
+
+        @import './components/content-header';
+    }
+}

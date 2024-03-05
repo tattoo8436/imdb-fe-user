@@ -1,0 +1,11 @@
+.modal {
+    &__content {
+        &__rate {
+            text-align: center;
+
+            * {
+                font-size: 2rem;
+            }
+        }
+    }
+}

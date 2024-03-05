@@ -1,0 +1,21 @@
+.content-header{
+    padding: 2rem;
+    margin-top: 100px;
+    background-image: url('../../../../../../public/images/home_welcome.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #444974;
+    color: #fff;
+
+    &__title{
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    &__description{
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 3rem;
+    }
+}

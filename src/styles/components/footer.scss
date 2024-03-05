@@ -1,0 +1,21 @@
+.footer {
+    text-align: center;
+    background-color: $primary;
+    color: #fff;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1rem 0;
+    z-index: 2;
+
+    &__header{
+        margin-bottom: .5rem;
+    }
+
+    &__content{
+        &__item{
+            margin: 0 .5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+}
