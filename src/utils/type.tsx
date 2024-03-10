@@ -58,7 +58,7 @@ export interface IEpisode {
   season: number;
   name: string;
   description: string;
-  image: Array<any>;
+  image: any;
   releaseDate: any;
   duration: string;
   numberVote: number;

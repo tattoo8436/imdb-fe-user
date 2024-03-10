@@ -16,17 +16,18 @@ interface IProps {
     undefined
   >;
   setIsRefetch: React.Dispatch<React.SetStateAction<boolean>>;
+  userScore: number;
 }
 
 const ModalRating = (props: IProps) => {
-  const { openModal, setOpenModal, hookForm, setIsRefetch } = props;
+  const { openModal, setOpenModal, hookForm, setIsRefetch, userScore } = props;
 
   const [loading, setLoading] = useState(false);
 
   const onCancel = () => {
     setOpenModal(false);
     hookForm.clearErrors();
-    setIsRefetch((pre) => !pre);
+    hookForm.setValue("score", userScore);
   };
 
   const onSubmit = async (value: any) => {

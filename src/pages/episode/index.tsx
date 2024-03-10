@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useSearchParams } from "react-router-dom";
-import { IEpisode, IMovie } from "../../utils/type";
+import { IDataSync, IEpisode, IMovie } from "../../utils/type";
 import { movieApi } from "../../apis/movieApi";
 import EpisodeDetail from "./EpisodeDetail";
 import ModalRating from "./ModalRating";
 import { useForm } from "react-hook-form";
 import { getCurrentAccount } from "../../utils";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 
 const Episode = () => {
   const [searchParams] = useSearchParams();
@@ -18,10 +18,6 @@ const Episode = () => {
   const hookFormRating = useForm({
     mode: "onChange",
     defaultValues: {
-      account: {
-        username: currentAccount?.username,
-        password: currentAccount?.password,
-      },
       episodeId: Number(episodeId),
       score: 0,
     },
@@ -29,18 +25,19 @@ const Episode = () => {
   const hookFormComment = useForm({
     mode: "onChange",
     defaultValues: {
-      account: {
-        username: currentAccount?.username,
-        password: currentAccount?.password,
-      },
       episodeId: Number(episodeId),
       comment: "",
     },
   });
 
-  const [episode, setEpisode] = useState<IEpisode | null>(null);
+  const [episode, setEpisode] = useState<IDataSync>({
+    loading: false,
+    data: null,
+    error: null,
+  });
   const [openModalRating, setOpenModalRating] = useState(false);
   const [isRefetch, setIsRefetch] = useState(false);
+  const [userScore, setUserScore] = useState(0);
 
   useEffect(() => {
     fetchEpisode();
@@ -51,29 +48,38 @@ const Episode = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const fetchEpisode = async () => {
-    console.log(episodeId);
-
+  const fetchEpisode = async (isSetLoading = true) => {
+    if (isSetLoading) {
+      setEpisode((pre) => ({ ...pre, loading: true }));
+    }
     try {
       const { data } = await movieApi.getEpisodeById(episodeId);
-      console.log(data);
-      setEpisode(data);
+      const sortComments = data.comments.sort((a: any, b: any) => b.id - a.id);
+      data.comments = sortComments;
+      setEpisode({
+        loading: false,
+        data,
+        error: null,
+      });
     } catch (error: any) {
       console.log(error);
+      setEpisode({
+        loading: false,
+        data: null,
+        error,
+      });
     }
   };
 
   const fetchRatingEpisode = async () => {
     try {
       const { data } = await movieApi.getRatingEpisodeByAccount({
-        accountAdmin: {
-          username: currentAccount.username,
-          password: currentAccount.password,
-        },
+        accountId: currentAccount?.id,
         episodeId: Number(episodeId),
       });
       console.log(data);
       hookFormRating.setValue("score", data.score ?? null);
+      setUserScore(data.score ?? null);
     } catch (error: any) {
       console.log(error);
     }
@@ -84,19 +90,20 @@ const Episode = () => {
       <Header />
 
       <div className="episode__content">
-        <Button
-          className="d-none"
-          onClick={() => console.log(hookFormRating.getValues())}
-        >
-          Log
-        </Button>
-        <EpisodeDetail
-          episode={episode}
-          userScore={hookFormRating.watch("score")}
-          setOpenModal={setOpenModalRating}
-          hookForm={hookFormComment}
-          setIsRefetch={setIsRefetch}
-        />
+        {episode.loading ? (
+          <div className="loading">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <EpisodeDetail
+            episode={episode}
+            userScore={userScore}
+            setOpenModal={setOpenModalRating}
+            hookForm={hookFormComment}
+            setIsRefetch={setIsRefetch}
+            fetchEpisode={fetchEpisode}
+          />
+        )}
       </div>
 
       <Footer />
@@ -107,6 +114,7 @@ const Episode = () => {
         hookForm={hookFormRating}
         setIsRefetch={setIsRefetch}
         movieId={movieId ?? ""}
+        userScore={userScore}
       />
     </div>
   );

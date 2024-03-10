@@ -73,13 +73,12 @@ const Search = () => {
   const fetchAllGenres = async () => {
     try {
       const { data } = await movieApi.searchGenre({
-        accountAdmin: {},
-        pageIndex: 1,
-        pageSize: 999999,
+        page: 1,
+        limit: 999999,
       });
       console.log({ data });
       setListGenres(
-        data?.listGenres?.map((i: any) => ({ label: i.name, value: i.id }))
+        data?.data?.map((i: any) => ({ label: i.name, value: i.id }))
       );
     } catch (error) {
       console.log(error);
@@ -109,25 +108,29 @@ const Search = () => {
             Log
           </Button>
           <Row>
-            <Col span={12} className="search-bar__name" offset={12}>
-              <Input
-                className="search-bar__name__input"
-                placeholder="Nhập tên phim"
-                value={search.name}
-                onChange={(e) =>
-                  setSearch((pre) => ({ ...pre, name: e.target.value }))
-                }
-                onPressEnter={() => setIsRefetch((pre) => !pre)}
-                allowClear
-              />
-              <Button
-                type="primary"
-                onClick={() => {
-                  setIsRefetch((pre) => !pre);
-                }}
-              >
-                Tìm kiếm
-              </Button>
+            <Col span={24}>
+              <Row justify="end">
+                <Col xs={24} md={12} className="search-bar__name">
+                  <Input
+                    className="search-bar__name__input"
+                    placeholder="Nhập tên phim"
+                    value={search.name}
+                    onChange={(e) =>
+                      setSearch((pre) => ({ ...pre, name: e.target.value }))
+                    }
+                    onPressEnter={() => setIsRefetch((pre) => !pre)}
+                    allowClear
+                  />
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setIsRefetch((pre) => !pre);
+                    }}
+                  >
+                    Tìm kiếm
+                  </Button>
+                </Col>
+              </Row>
             </Col>
 
             <Col span={24} className="search-bar__filter">

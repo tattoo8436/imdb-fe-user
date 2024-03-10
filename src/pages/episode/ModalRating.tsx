@@ -9,10 +9,6 @@ interface IProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   hookForm: UseFormReturn<
     {
-      account: {
-        username: any;
-        password: any;
-      };
       episodeId: number;
       score: number;
     },
@@ -21,26 +17,30 @@ interface IProps {
   >;
   setIsRefetch: React.Dispatch<React.SetStateAction<boolean>>;
   movieId: string;
+  userScore: number;
 }
 
 const ModalRating = (props: IProps) => {
-  const { openModal, setOpenModal, hookForm, setIsRefetch, movieId } = props;
+  const {
+    openModal,
+    setOpenModal,
+    hookForm,
+    setIsRefetch,
+    movieId,
+    userScore,
+  } = props;
 
   const [loading, setLoading] = useState(false);
 
   const onCancel = () => {
     setOpenModal(false);
     hookForm.clearErrors();
-    setIsRefetch((pre) => !pre);
+    hookForm.setValue("score", userScore);
   };
 
   const onSubmit = async (value: any) => {
     setLoading(true);
     const payload = {
-      accountAdmin: {
-        username: value.account.username,
-        password: value.account.password,
-      },
       score: value.score,
       episodeId: value.episodeId,
       movieId: Number(movieId),
@@ -68,6 +68,7 @@ const ModalRating = (props: IProps) => {
       okText="Đánh giá"
       cancelText="Huỷ"
       onOk={hookForm.handleSubmit(onSubmit)}
+      okButtonProps={{ loading: loading }}
     >
       <div className="modal__header">Đánh giá phim</div>
 
