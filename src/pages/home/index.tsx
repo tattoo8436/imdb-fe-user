@@ -6,11 +6,11 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { movieApi } from "../../apis/movieApi";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import { BASE_URL_API } from "../../utils";
-import { IDataSync, IMovie } from "../../utils/type";
 import ImageDefault from "../../utils/constant";
+import { IDataSync, IMovie } from "../../utils/type";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   const navigate = useNavigate();

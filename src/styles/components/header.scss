@@ -1,55 +1,84 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $primary;
+  color: #fff;
+  font-weight: 600;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 2;
+
+  &__left {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: $primary;
-    color: #fff;
-    font-weight: 600;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 2;
+    margin-left: 1rem;
+    cursor: pointer;
 
-    &__left {
-        display: flex;
-        align-items: center;
-        margin-left: 1rem;
-        cursor: pointer;
-
-        .logo {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-        }
+    @include mobile {
+      margin-left: 0.5rem;
     }
 
-    &__right {
-        display: flex;
-        align-items: center;
-        margin-right: 1rem;
+    .logo {
+      font-size: 1.5rem;
+      margin-right: 1rem;
 
-        &__search {
-            margin-right: 1rem;
-            cursor: pointer;
-        }
-
-        .divider {
-            width: 1px;
-            height: 1rem;
-            background-color: #fff;
-        }
-
-        &__btn {
-            padding: 1rem;
-            cursor: pointer;
-
-            &>* {
-                padding: 2px;
-            }
-
-            &__icon {
-                font-size: .8rem;
-            }
-        }
+      @include mobile {
+        margin-right: 0.5rem;
+      }
     }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+
+    @include mobile {
+      margin-right: 0;
+    }
+
+    &__search-text {
+      margin-right: 1rem;
+      cursor: pointer;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &__search-icon {
+      margin-right: 0.5rem;
+      cursor: pointer;
+
+      svg {
+        font-size: 1rem;
+      }
+    }
+
+    .divider {
+      width: 1px;
+      height: 1rem;
+      background-color: #fff;
+    }
+
+    &__btn {
+      padding: 1rem;
+      cursor: pointer;
+
+      @include mobile {
+        padding: 0.5rem;
+      }
+
+      & > * {
+        padding: 2px;
+      }
+
+      &__icon {
+        font-size: 0.8rem;
+      }
+    }
+  }
 }

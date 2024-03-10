@@ -128,15 +128,22 @@
           margin-right: 0.5rem;
           font-weight: 600;
         }
-
         &__item:last-child::after {
           content: "";
         }
       }
     }
 
+    margin: 1rem 0;
     &__actor {
-      margin: 1rem 0;
+    }
+  }
+
+  .list-episodes {
+    &__season {
+      &__select {
+        margin-bottom: 1rem;
+      }
     }
   }
 

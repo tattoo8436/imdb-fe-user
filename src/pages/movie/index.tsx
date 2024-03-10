@@ -37,6 +37,7 @@ const Movie = () => {
   const [listMoviesSimilar, setListMoviesSimilar] = useState<IMovie[]>([]);
   const [openModalRating, setOpenModalRating] = useState(false);
   const [isRefetch, setIsRefetch] = useState(false);
+  const [userScore, setUserScore] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,11 +46,12 @@ const Movie = () => {
     fetchSimilar();
   }, [isRefetch, movieId]);
 
-  const fetchMovie = async () => {
-    setMovie((pre) => ({ ...pre, loading: true }));
+  const fetchMovie = async (isSetLoading = true) => {
+    if (isSetLoading) {
+      setMovie((pre) => ({ ...pre, loading: true }));
+    }
     try {
       const { data } = await movieApi.getMovieById(movieId);
-      console.log(data);
       setMovie({
         loading: false,
         data,
@@ -73,6 +75,7 @@ const Movie = () => {
       });
       console.log(data);
       hookFormRating.setValue("score", data.score ?? null);
+      setUserScore(data.score ?? null);
     } catch (error: any) {
       console.log(error);
     }
@@ -100,13 +103,14 @@ const Movie = () => {
         ) : (
           <MovieDetail
             movie={movie}
-            userScore={hookFormRating.watch("score")}
+            userScore={userScore}
             setOpenModal={setOpenModalRating}
             hookForm={hookFormComment}
             setIsRefetch={setIsRefetch}
             currentAccount={currentAccount}
             listMoviesSimilar={listMoviesSimilar}
             setMovie={setMovie}
+            fetchMovie={fetchMovie}
           />
         )}
       </div>
@@ -118,6 +122,7 @@ const Movie = () => {
         setOpenModal={setOpenModalRating}
         hookForm={hookFormRating}
         setIsRefetch={setIsRefetch}
+        userScore={userScore}
       />
     </div>
   );

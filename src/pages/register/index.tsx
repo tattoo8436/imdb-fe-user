@@ -31,7 +31,7 @@ const Register = () => {
     } catch (error: any) {
       console.log(error);
       setLoading(false);
-      toast.error(error.response?.data, { autoClose: 3000 });
+      toast.error(error.response.data?.message, { autoClose: 3000 });
     }
   };
 
@@ -64,6 +64,7 @@ const Register = () => {
                   placeholder="Tên đăng nhập"
                   className="form__item__input"
                   status={fieldState.error !== undefined ? "error" : ""}
+                  allowClear
                 />
               )}
             />
@@ -92,6 +93,7 @@ const Register = () => {
                   placeholder="Mật khẩu"
                   className="form__item__input"
                   status={fieldState.error !== undefined ? "error" : ""}
+                  allowClear
                 />
               )}
             />

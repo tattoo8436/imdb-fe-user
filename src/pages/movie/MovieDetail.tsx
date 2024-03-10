@@ -1,20 +1,12 @@
 import { StarFilled, StarOutlined } from "@ant-design/icons";
-import {
-  Avatar,
-  Button,
-  Col,
-  Collapse,
-  CollapseProps,
-  Input,
-  Row,
-  Skeleton,
-} from "antd";
+import { Avatar, Button, Col, Collapse, CollapseProps, Input, Row } from "antd";
 import dayjs from "dayjs";
 import numeral from "numeral";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import YouTube from "react-youtube";
+import { ContextLocation } from "../../App";
 import { movieApi } from "../../apis/movieApi";
 import ImageDefault from "../../utils/constant";
 import { IDataSync, IMovie } from "../../utils/type";
@@ -36,6 +28,7 @@ interface IProps {
   currentAccount: any;
   listMoviesSimilar: IMovie[];
   setMovie: React.Dispatch<React.SetStateAction<IDataSync>>;
+  fetchMovie: any;
 }
 
 const MovieDetail = (props: IProps) => {
@@ -48,9 +41,12 @@ const MovieDetail = (props: IProps) => {
     currentAccount,
     listMoviesSimilar,
     setMovie,
+    fetchMovie,
   } = props;
   const isLogin = localStorage.getItem("account") !== null;
   const navigate = useNavigate();
+  const location = useLocation();
+  const contextLocation: any = useContext(ContextLocation);
 
   const [loading, setLoading] = useState(false);
 
@@ -64,25 +60,12 @@ const MovieDetail = (props: IProps) => {
     try {
       const { data } = await movieApi.comment(payload);
       console.log(data);
-      fetchMovie();
+      fetchMovie(false);
       setLoading(false);
       hookForm.reset();
     } catch (error) {
       console.log(error);
       setLoading(false);
-    }
-  };
-
-  const fetchMovie = async () => {
-    try {
-      const { data } = await movieApi.getMovieById(movie.data?.id);
-      setMovie({
-        loading: false,
-        data,
-        error: null,
-      });
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -131,27 +114,29 @@ const MovieDetail = (props: IProps) => {
             </div>
           </div>
 
-          <div className="rating-user">
-            <div className="rating-user__label">Đánh giá của bạn</div>
-            {userScore !== null ? (
-              <div
-                className="rating-user__value"
-                onClick={() => setOpenModal(true)}
-              >
-                <StarFilled className="rating-user__value__icon" />
-                {userScore}/10
-              </div>
-            ) : (
-              <Button
-                className="rating-user__input"
-                onClick={() => setOpenModal(true)}
-                icon={<StarOutlined />}
-                disabled={!isLogin}
-              >
-                Đánh giá
-              </Button>
-            )}
-          </div>
+          {isLogin && (
+            <div className="rating-user">
+              <div className="rating-user__label">Đánh giá của bạn</div>
+              {userScore !== null ? (
+                <div
+                  className="rating-user__value"
+                  onClick={() => setOpenModal(true)}
+                >
+                  <StarFilled className="rating-user__value__icon" />
+                  {userScore}/10
+                </div>
+              ) : (
+                <Button
+                  className="rating-user__input"
+                  onClick={() => setOpenModal(true)}
+                  icon={<StarOutlined />}
+                  disabled={!isLogin}
+                >
+                  Đánh giá
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -301,7 +286,18 @@ const MovieDetail = (props: IProps) => {
                 </div>
               ) : (
                 <div className="movie-detail__footer__comment__note">
-                  Vui lòng <Link to="/login">đăng nhập</Link> để bình luận
+                  Vui lòng{" "}
+                  <Link
+                    to="/login"
+                    onClick={() => {
+                      contextLocation.setPreLocation(
+                        location.pathname + location.search
+                      );
+                    }}
+                  >
+                    đăng nhập
+                  </Link>{" "}
+                  để bình luận
                 </div>
               )}
 
@@ -340,7 +336,7 @@ const MovieDetail = (props: IProps) => {
               <div
                 key={i.id}
                 className="movie-item"
-                onClick={() => navigate(`/movie?.data?movieId=${i.id}`)}
+                onClick={() => navigate(`/movie?movieId=${i.id}`)}
               >
                 <div className="movie-item__image">
                   <img

@@ -1,13 +1,14 @@
 import {
-  DownOutlined,
+  LogoutOutlined,
+  SearchOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import React, { useContext } from "react";
-import { Button, Divider, Dropdown, MenuProps } from "antd";
+import { Dropdown, MenuProps } from "antd";
+import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getCurrentAccount } from "../utils";
 import { ContextLocation } from "../App";
+import { getCurrentAccount } from "../utils";
 
 const Header = () => {
   const isLogin: boolean = localStorage.getItem("account") !== null;
@@ -24,7 +25,12 @@ const Header = () => {
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <div onClick={handleLogout}>Đăng xuất</div>,
+      label: (
+        <div onClick={handleLogout}>
+          <LogoutOutlined />
+          <span style={{ marginLeft: "4px" }}>Đăng xuất</span>
+        </div>
+      ),
     },
   ];
 
@@ -36,16 +42,21 @@ const Header = () => {
 
       <div className="header__right">
         <div
-          className="header__right__search"
+          className="header__right__search-text"
           onClick={() => navigate("/search")}
         >
           Tìm kiếm phim
         </div>
 
+        <SearchOutlined
+          className="header__right__search-icon"
+          onClick={() => navigate("/search")}
+        />
+
         <div className="divider"></div>
 
         {isLogin ? (
-          <Dropdown menu={{ items }}>
+          <Dropdown menu={{ items }} trigger={["click"]}>
             <div className="header__right__btn">
               <UserOutlined className="header__right__btn__avatar" />
               <span>{account?.username}</span>

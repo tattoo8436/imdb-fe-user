@@ -4,9 +4,18 @@
     padding: 0 2rem;
     min-height: 80vh;
 
+    @include mobile {
+      padding: 0 1rem;
+      margin-top: 40px;
+    }
+
     &__title {
       font-size: 1.5rem;
       font-weight: 600;
+
+      @include mobile {
+        font-size: 1rem;
+      }
     }
 
     &__search-bar {

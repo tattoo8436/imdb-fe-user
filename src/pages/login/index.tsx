@@ -33,7 +33,7 @@ const Login = () => {
     } catch (error: any) {
       console.log(error);
       setLoading(false);
-      toast.error(error.response?.data, { autoClose: 3000 });
+      toast.error(error.response.data?.message, { autoClose: 3000 });
     }
   };
 
@@ -66,6 +66,7 @@ const Login = () => {
                   placeholder="Tên đăng nhập"
                   className="form__item__input"
                   status={fieldState.error !== undefined ? "error" : ""}
+                  allowClear
                 />
               )}
             />
@@ -94,6 +95,7 @@ const Login = () => {
                   placeholder="Mật khẩu"
                   className="form__item__input"
                   status={fieldState.error !== undefined ? "error" : ""}
+                  allowClear
                 />
               )}
             />

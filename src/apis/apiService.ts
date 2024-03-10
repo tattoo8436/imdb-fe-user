@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const axiosAuth = axios.create();
 
@@ -17,20 +18,4 @@ axiosAuth.interceptors.request.use(
   }
 );
 
-// axiosAuth.interceptors.response.use(
-//   async (response) => {
-//     return response;
-//   },
-//   async (error) => {
-//     if (
-//       error.response &&
-//       (error.response.status === 401 || error.response.status === 403)
-//     ) {
-//       localStorage.clear();
-//       window.location.href = "/login";
-//       return Promise.reject(error);
-//     }
-//     return Promise.reject(error);
-//   }
-// );
 export default axiosAuth;
