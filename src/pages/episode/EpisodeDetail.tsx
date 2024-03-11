@@ -169,6 +169,7 @@ const EpisodeDetail = (props: IProps) => {
                             {...field}
                             placeholder="Nhập bình luận"
                             allowClear
+                            className="form__input__input"
                           />
                         )}
                       />
