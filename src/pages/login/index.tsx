@@ -67,6 +67,7 @@ const Login = () => {
                   className="form__item__input"
                   status={fieldState.error !== undefined ? "error" : ""}
                   allowClear
+                  autoFocus
                 />
               )}
             />

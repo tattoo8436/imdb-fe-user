@@ -2,7 +2,12 @@
   &__content {
     margin-top: 80px;
     padding: 0 5rem;
-    min-height: 80vh;
+    min-height: 90vh;
+
+    @include mobile {
+      padding: 0 1rem;
+      margin-top: 50px;
+    }
 
     .loading {
       width: 100%;

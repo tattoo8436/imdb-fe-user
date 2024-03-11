@@ -98,7 +98,7 @@ const Director = () => {
 
               <Row gutter={[24, 24]}>
                 {listMovies?.map((i: any) => (
-                  <Col key={i.id} xs={12} md={8}>
+                  <Col key={i.id} xs={24} md={8}>
                     <div
                       className="item-movie"
                       onClick={() => navigate(`/movie?movieId=${i.id}`)}

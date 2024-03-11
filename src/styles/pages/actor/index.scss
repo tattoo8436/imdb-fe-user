@@ -2,7 +2,12 @@
   &__content {
     margin-top: 80px;
     padding: 0 5rem;
-    min-height: 80vh;
+    min-height: 90vh;
+
+    @include mobile {
+      padding: 0 1rem;
+      margin-top: 50px;
+    }
 
     .loading {
       width: 100%;
@@ -16,6 +21,10 @@
       font-size: 2rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
+
+      @include mobile {
+        font-size: 1.2rem;
+      }
     }
 
     &__dob {
@@ -29,6 +38,11 @@
       &__image {
         height: 300px;
         width: 200px;
+
+        @include mobile {
+          height: 210px;
+          width: 140px;
+        }
       }
 
       &__description {
@@ -43,6 +57,10 @@
         font-size: 1.3rem;
         font-weight: 600;
         margin-bottom: 1rem;
+
+        @include mobile {
+          font-size: 1rem;
+        }
       }
 
       .item-movie {

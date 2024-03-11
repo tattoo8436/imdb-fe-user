@@ -24,11 +24,21 @@
 
       &__icon {
         margin-right: 1rem;
+
+        @include mobile {
+          svg {
+            font-size: 1rem;
+          }
+        }
       }
 
       &__text {
         color: $primary;
         font-weight: 600;
+
+        @include mobile {
+          font-size: 1rem;
+        }
       }
     }
 
@@ -36,6 +46,22 @@
       &__btn {
         text-align: center;
         margin-bottom: 1rem;
+
+        @include mobile {
+          button {
+            height: 26px;
+            line-height: 1;
+          }
+        }
+      }
+
+      &__item {
+        @include mobile {
+          &__input {
+            height: 26px;
+            font-size: 0.8rem;
+          }
+        }
       }
     }
 
