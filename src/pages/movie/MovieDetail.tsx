@@ -142,11 +142,17 @@ const MovieDetail = (props: IProps) => {
 
       <div className="movie-detail__content">
         <div className="movie-detail__content__asset">
-          <img
-            className="movie-detail__content__asset__image"
-            src={movie?.data?.image}
-            alt="Ảnh"
-          />
+          <div className="movie-detail__content__asset__image__wrapper">
+            <img
+              className="movie-detail__content__asset__image"
+              src={movie?.data?.image}
+              alt="Ảnh"
+            />
+
+            <div className="movie-detail__content__description">
+              {movie?.data?.description}
+            </div>
+          </div>
 
           <YouTube
             className="movie-detail__content__asset__trailer"
@@ -269,6 +275,7 @@ const MovieDetail = (props: IProps) => {
                             {...field}
                             placeholder="Nhập bình luận"
                             allowClear
+                            className="form__input__input"
                           />
                         )}
                       />

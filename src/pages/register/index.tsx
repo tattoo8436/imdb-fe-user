@@ -65,6 +65,7 @@ const Register = () => {
                   className="form__item__input"
                   status={fieldState.error !== undefined ? "error" : ""}
                   allowClear
+                  autoFocus
                 />
               )}
             />

@@ -1,11 +1,15 @@
 .modal {
-    &__content {
-        &__rate {
-            text-align: center;
+  &__content {
+    &__rate {
+      text-align: center;
 
-            * {
-                font-size: 2rem;
-            }
+      * {
+        font-size: 2rem;
+
+        @include mobile {
+          font-size: 1.2rem !important;
         }
+      }
     }
+  }
 }

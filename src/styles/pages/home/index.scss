@@ -1,12 +1,12 @@
 .home {
   &__content {
     padding: 0 5rem;
-    min-height: 80vh;
+    min-height: 90vh;
     margin-top: 80px;
 
     @include mobile {
       padding: 0 1rem;
-      margin-top: 40px;
+      margin-top: 50px;
     }
 
     &__header {
@@ -41,6 +41,14 @@
         @include mobile {
           font-size: 1.2rem;
           margin-bottom: 1rem;
+        }
+      }
+
+      &__search {
+        @include mobile {
+          height: 26px;
+          display: flex;
+          align-items: center;
         }
       }
     }

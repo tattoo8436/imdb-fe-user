@@ -36,6 +36,22 @@
       &__btn {
         text-align: center;
         margin-bottom: 1rem;
+
+        @include mobile {
+          button {
+            height: 26px;
+            line-height: 1;
+          }
+        }
+      }
+
+      &__item {
+        @include mobile {
+          &__input {
+            height: 26px;
+            font-size: 0.8rem;
+          }
+        }
       }
     }
 

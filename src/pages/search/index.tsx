@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { Button, Col, Input, Pagination, Row, Select, Spin } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Input,
+  Pagination,
+  Row,
+  Select,
+  Spin,
+} from "antd";
 import { IDataSync, IMovie, ISearchMovie } from "../../utils/type";
 import {
   optionLanguageSearch,
@@ -13,6 +22,7 @@ import {
 import { movieApi } from "../../apis/movieApi";
 import MovieItem from "./MovieItem";
 import { useNavigate } from "react-router-dom";
+import { FilterOutlined } from "@ant-design/icons";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -36,6 +46,7 @@ const Search = () => {
     error: null,
   });
   const [totalRecords, setTotalRecords] = useState(0);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   useEffect(() => {
     fetchAllGenres();
@@ -96,6 +107,100 @@ const Search = () => {
     setIsRefetch((pre) => !pre);
   };
 
+  const onCloseDrawer = () => {
+    setOpenDrawer(false);
+  };
+
+  const onOpenDrawer = () => {
+    setOpenDrawer(true);
+  };
+
+  const filterElement = () => {
+    return (
+      <Col span={24} className="search-bar__filter">
+        <Row gutter={[24, 24]} justify="center">
+          <Col className="search-bar__filter__item">
+            <div className="search-bar__filter__item__label">Kiểu phim:</div>
+
+            <Select
+              className="search-bar__filter__item__select"
+              placeholder="Chọn kiểu phim"
+              options={optionType}
+              value={search.type}
+              onChange={(e) => onSelectChange(e, "type")}
+              allowClear
+            />
+          </Col>
+
+          <Col className="search-bar__filter__item">
+            <div className="search-bar__filter__item__label">Thể loại:</div>
+
+            <Select
+              className="search-bar__filter__item__select"
+              placeholder="Chọn thể loại"
+              options={listGenres}
+              value={search.genreId}
+              onChange={(e) => onSelectChange(e, "genreId")}
+              allowClear
+            />
+          </Col>
+
+          <Col className="search-bar__filter__item">
+            <div className="search-bar__filter__item__label">Đánh giá:</div>
+
+            <Select
+              className="search-bar__filter__item__select"
+              placeholder="Chọn đánh giá"
+              options={optionScore}
+              value={search.score}
+              onChange={(e) => onSelectChange(e, "score")}
+              allowClear
+            />
+          </Col>
+
+          <Col className="search-bar__filter__item">
+            <div className="search-bar__filter__item__label">Năm:</div>
+
+            <Select
+              className="search-bar__filter__item__select"
+              placeholder="Chọn năm"
+              options={optionYear}
+              value={search.releaseDate}
+              onChange={(e) => onSelectChange(e, "releaseDate")}
+              allowClear
+            />
+          </Col>
+
+          <Col className="search-bar__filter__item">
+            <div className="search-bar__filter__item__label">Ngôn ngữ:</div>
+
+            <Select
+              className="search-bar__filter__item__select"
+              placeholder="Chọn ngôn ngữ"
+              options={optionLanguageSearch}
+              value={search.language}
+              onChange={(e) => onSelectChange(e, "language")}
+              allowClear
+            />
+          </Col>
+
+          <Col className="search-bar__filter__item">
+            <div className="search-bar__filter__item__label">Sắp xếp theo:</div>
+
+            <Select
+              className="search-bar__filter__item__select"
+              placeholder="Chọn sắp xếp"
+              options={optionSort}
+              value={search.sortBy}
+              onChange={(e) => onSelectChange(e, "sortBy")}
+              allowClear
+            />
+          </Col>
+        </Row>
+      </Col>
+    );
+  };
+
   return (
     <div className="search">
       <Header />
@@ -133,97 +238,13 @@ const Search = () => {
               </Row>
             </Col>
 
-            <Col span={24} className="search-bar__filter">
-              <Row gutter={[24, 24]} justify="center">
-                <Col className="search-bar__filter__item">
-                  <div className="search-bar__filter__item__label">
-                    Kiểu phim:
-                  </div>
-
-                  <Select
-                    className="search-bar__filter__item__select"
-                    placeholder="Chọn kiểu phim"
-                    options={optionType}
-                    value={search.type}
-                    onChange={(e) => onSelectChange(e, "type")}
-                    allowClear
-                  />
-                </Col>
-
-                <Col className="search-bar__filter__item">
-                  <div className="search-bar__filter__item__label">
-                    Thể loại:
-                  </div>
-
-                  <Select
-                    className="search-bar__filter__item__select"
-                    placeholder="Chọn thể loại"
-                    options={listGenres}
-                    value={search.genreId}
-                    onChange={(e) => onSelectChange(e, "genreId")}
-                    allowClear
-                  />
-                </Col>
-
-                <Col className="search-bar__filter__item">
-                  <div className="search-bar__filter__item__label">
-                    Đánh giá:
-                  </div>
-
-                  <Select
-                    className="search-bar__filter__item__select"
-                    placeholder="Chọn đánh giá"
-                    options={optionScore}
-                    value={search.score}
-                    onChange={(e) => onSelectChange(e, "score")}
-                    allowClear
-                  />
-                </Col>
-
-                <Col className="search-bar__filter__item">
-                  <div className="search-bar__filter__item__label">Năm:</div>
-
-                  <Select
-                    className="search-bar__filter__item__select"
-                    placeholder="Chọn năm"
-                    options={optionYear}
-                    value={search.releaseDate}
-                    onChange={(e) => onSelectChange(e, "releaseDate")}
-                    allowClear
-                  />
-                </Col>
-
-                <Col className="search-bar__filter__item">
-                  <div className="search-bar__filter__item__label">
-                    Ngôn ngữ:
-                  </div>
-
-                  <Select
-                    className="search-bar__filter__item__select"
-                    placeholder="Chọn ngôn ngữ"
-                    options={optionLanguageSearch}
-                    value={search.language}
-                    onChange={(e) => onSelectChange(e, "language")}
-                    allowClear
-                  />
-                </Col>
-
-                <Col className="search-bar__filter__item">
-                  <div className="search-bar__filter__item__label">
-                    Sắp xếp theo:
-                  </div>
-
-                  <Select
-                    className="search-bar__filter__item__select"
-                    placeholder="Chọn sắp xếp"
-                    options={optionSort}
-                    value={search.sortBy}
-                    onChange={(e) => onSelectChange(e, "sortBy")}
-                    allowClear
-                  />
-                </Col>
-              </Row>
+            <Col span={24} className="search-bar__icon">
+              <Button icon={<FilterOutlined />} onClick={onOpenDrawer}>
+                Lọc
+              </Button>
             </Col>
+
+            {filterElement()}
           </Row>
         </div>
 
@@ -257,6 +278,15 @@ const Search = () => {
       </div>
 
       <Footer />
+
+      <Drawer
+        title="Tìm kiếm nâng cao"
+        open={openDrawer}
+        onClose={onCloseDrawer}
+        width={250}
+      >
+        <Row>{filterElement()}</Row>
+      </Drawer>
     </div>
   );
 };

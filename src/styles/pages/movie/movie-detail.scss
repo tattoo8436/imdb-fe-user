@@ -9,6 +9,10 @@
         font-size: 2rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
+
+        @include mobile {
+          font-size: 1.2rem;
+        }
       }
     }
 
@@ -23,6 +27,10 @@
 
         &__label {
           margin-bottom: 0.5rem;
+
+          @include mobile {
+            display: none;
+          }
         }
 
         &__value {
@@ -44,6 +52,10 @@
 
         &__label {
           margin-bottom: 0.5rem;
+
+          @include mobile {
+            display: none;
+          }
         }
 
         &__input {
@@ -79,14 +91,54 @@
       display: flex;
       margin-bottom: 1rem;
 
+      .movie-detail__content__description {
+        display: none;
+      }
+
+      @include mobile {
+        flex-direction: column-reverse;
+
+        &__image {
+          &__wrapper {
+            display: flex;
+
+            .movie-detail__content__description {
+              display: block;
+              margin-left: 1rem;
+            }
+          }
+        }
+      }
+
       &__image {
         height: 400px;
+
+        @include mobile {
+          height: 200px;
+          width: 125px;
+        }
+      }
+
+      &__trailer {
+        @include mobile {
+          margin-bottom: 1rem;
+
+          iframe {
+            width: 100%;
+            height: 200px;
+          }
+        }
       }
 
       .loading-overlay {
         &__image {
           height: 400px;
           width: 250px;
+
+          @include mobile {
+            height: 200px;
+            width: 125px;
+          }
         }
       }
     }
@@ -107,6 +159,10 @@
 
     &__description {
       margin-bottom: 1rem;
+
+      @include mobile {
+        display: none;
+      }
     }
 
     &__director {
@@ -143,12 +199,29 @@
     &__season {
       &__select {
         margin-bottom: 1rem;
+
+        @include mobile {
+          height: 26px;
+        }
       }
     }
   }
 
   &__episode {
     margin-bottom: 1rem;
+
+    @include mobile {
+      .ant-collapse-content-box {
+        padding: 0.5rem;
+      }
+    }
+
+    .ant-collapse-header {
+      align-items: center;
+      @include mobile {
+        padding: 0.5rem;
+      }
+    }
 
     .anticon,
     .ant-collapse-header-text {
@@ -167,6 +240,11 @@
         width: 80px;
         height: 120px;
         margin-right: 1rem;
+
+        @include mobile {
+          width: 56px;
+          height: 84px;
+        }
       }
 
       &__detail {
@@ -174,10 +252,18 @@
           color: $primary;
           font-weight: 600;
           margin-bottom: 0.5rem;
+
+          @include mobile {
+            margin-bottom: 0;
+          }
         }
 
         &__score {
           margin-bottom: 0.5rem;
+
+          @include mobile {
+            margin-bottom: 0;
+          }
 
           .anticon {
             color: $yellow;
@@ -188,6 +274,10 @@
 
         &__description {
           margin-bottom: 0.5rem;
+
+          @include mobile {
+            margin-bottom: 0;
+          }
         }
       }
     }
@@ -209,11 +299,19 @@
           width: 4px;
           background-color: $primary;
           margin-right: 0.5rem;
+
+          @include mobile {
+            height: 1.2rem;
+          }
         }
 
         &__text {
           font-size: 1.5rem;
           font-weight: 600;
+
+          @include mobile {
+            font-size: 1.2rem;
+          }
         }
       }
 
@@ -226,6 +324,11 @@
             width: 80px;
             height: 80px;
             margin-right: 1rem;
+
+            @include mobile {
+              width: 50px;
+              height: 50px;
+            }
           }
 
           &__text {
@@ -250,6 +353,10 @@
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 1rem;
+
+        @include mobile {
+          font-size: 1rem;
+        }
       }
 
       &__input {
@@ -257,6 +364,12 @@
 
         &__btn {
           margin-left: 0.5rem;
+
+          @include mobile {
+            height: 26px;
+            display: flex;
+            align-items: center;
+          }
         }
 
         .form {
@@ -264,6 +377,13 @@
 
           &__input {
             flex: 1;
+
+            &__input {
+              @include mobile {
+                height: 26px;
+                font-size: 0.8rem;
+              }
+            }
           }
         }
       }
@@ -310,11 +430,19 @@
           width: 4px;
           background-color: $primary;
           margin-right: 0.5rem;
+
+          @include mobile {
+            height: 1.2rem;
+          }
         }
 
         &__text {
           font-size: 1.5rem;
           font-weight: 600;
+
+          @include mobile {
+            font-size: 1.2rem;
+          }
         }
       }
 
@@ -329,6 +457,10 @@
           margin: 0 1rem;
           cursor: pointer;
 
+          @include mobile {
+            width: 140px;
+          }
+
           &:first-child {
             margin-left: 0;
           }
@@ -338,6 +470,11 @@
             height: 300px;
             width: 200px;
             margin-bottom: 0.5rem;
+
+            @include mobile {
+              height: 210px;
+              width: 140px;
+            }
 
             &__image {
               border-radius: 8px;
