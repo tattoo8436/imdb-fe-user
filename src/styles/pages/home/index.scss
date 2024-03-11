@@ -94,6 +94,10 @@
           cursor: pointer;
 
           @include mobile {
+            width: 140px;
+          }
+
+          @include mobile {
             margin: 0 0.5rem;
           }
 
