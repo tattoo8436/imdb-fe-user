@@ -11,12 +11,15 @@ $divider: #ddd;
   }
 }
 
+html {
+  font-size: 14px;
+}
+
 * {
   //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-family: "Ysabeau Infant", sans-serif;
-  font-size: 14px;
 
-  @include mobile() {
+  @include mobile {
     font-size: 0.8rem;
   }
 }
