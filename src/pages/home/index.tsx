@@ -5,12 +5,12 @@ import dayjs from "dayjs";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { accountApi } from "../../apis/accountApi";
 import { movieApi } from "../../apis/movieApi";
-import { BASE_URL_API } from "../../utils";
-import ImageDefault from "../../utils/constant";
-import { IDataSync, IMovie } from "../../utils/type";
-import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import ImageDefault, { BASE_URL } from "../../utils/constant";
+import { IDataSync, IMovie } from "../../utils/type";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -32,28 +32,37 @@ const Home = () => {
   }, []);
 
   const handleAddAccount = async () => {
-    for (let i = 1; i < 99; i++) {
+    for (let i = 1; i <= 99; i++) {
       const payload = {
         username: `account${i}`,
         password: "123",
         email: `account${i}@gmail.com`,
       };
-      console.log(i);
-      setTimeout(() => {}, 100);
+      await accountApi.register(payload);
     }
   };
 
   const handleAddRating = async () => {
-    for (let i = 100; i < 190; i++) {
-      const payload = {
-        accountAdmin: {
-          username: `account${i}`,
-          password: "123",
-        },
-        movieId: 11,
-        score: _.random(4, 10),
+    for (let i = 1; i <= 42; i++) {
+      const payloadLogin = {
+        username: `account${i}`,
+        password: "123",
       };
-      await axios.post(`${BASE_URL_API}/rating/movie`, payload);
+      const dataLogin = await axios.post(
+        `${BASE_URL}/api/accounts/login`,
+        payloadLogin
+      );
+      console.log(dataLogin);
+
+      const payload = {
+        movieId: 11,
+        score: _.random(3, 10),
+      };
+      await axios.post(`${BASE_URL}/api/ratings/movie`, payload, {
+        headers: {
+          Authorization: `Bearer ${dataLogin.data?.accessToken}`,
+        },
+      });
     }
   };
 
@@ -95,7 +104,7 @@ const Home = () => {
       const { data } = await movieApi.searchMovie({
         pageIndex: 1,
         pageSize: 10,
-        releaseDate: dayjs().subtract(1, "month").format("YYYY-MM-DD"),
+        releaseDate: dayjs().subtract(1, "year").format("YYYY-MM-DD"),
         sortBy: "releaseDate",
         orderBy: "DESC",
       });

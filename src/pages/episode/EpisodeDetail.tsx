@@ -5,11 +5,10 @@ import numeral from "numeral";
 import React, { useContext, useState } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ContextLocation } from "../../App";
 import { movieApi } from "../../apis/movieApi";
-import { BASE_URL_API } from "../../utils";
 import { DEFAULT_FORMAT_DATE } from "../../utils/constant";
 import { IDataSync } from "../../utils/type";
-import { ContextLocation } from "../../App";
 
 interface IProps {
   episode: IDataSync;
