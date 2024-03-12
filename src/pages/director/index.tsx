@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { IDataSync, IDirector } from "../../utils/type";
-import { movieApi } from "../../apis/movieApi";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { Col, Image, Row, Spin } from "antd";
-import { BASE_URL_API } from "../../utils";
-import dayjs from "dayjs";
 import { StarFilled } from "@ant-design/icons";
+import { Col, Row, Spin } from "antd";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { movieApi } from "../../apis/movieApi";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 import ImageDefault, { DEFAULT_FORMAT_DATE } from "../../utils/constant";
+import { IDataSync } from "../../utils/type";
 
 const Director = () => {
   const [searchParams] = useSearchParams();
